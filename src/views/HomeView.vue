@@ -15,7 +15,6 @@
     <div class="register-link">
       <p>Not a member? <a>Sign Up</a></p>
     </div>
-
     <button class="admin-button" @click="openAdminLogin">Admin Login</button>
   </div>
 </template>
@@ -135,5 +134,9 @@ input[type="submit"]:hover {
 .register-link a {
   color: #154b6b;
   text-decoration: underline;
+}
+.register-link p {
+  text-align: center;
+  color: black;
 }
 </style>

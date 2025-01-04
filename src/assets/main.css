@@ -32,8 +32,9 @@ a,
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
   }
+}
 
-  * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -44,7 +45,5 @@ a,
 
 body {
     background-color: #F5F5F5;
-}
-
 }
 
