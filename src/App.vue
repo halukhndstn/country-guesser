@@ -4,12 +4,6 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
- <header class="header">
-        <a class="logo" id="reloadPage" href="#">
-            <span>Country</span>Guesser
-        </a>
-    </header>
-
   <RouterView />
 </template>
 
