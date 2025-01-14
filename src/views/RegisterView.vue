@@ -3,12 +3,8 @@
       <h2>Sign Up</h2>
       <form id="registrationForm" @submit.prevent="submitForm">
         <div class="form-group">
-          <label for="firstname">First Name:</label>
-          <input type="text" id="firstname" v-model="firstname" required />
-        </div>
-        <div class="form-group">
-          <label for="lastname">Last Name:</label>
-          <input type="text" id="lastname" v-model="lastname" required />
+          <label for="firstname">User Name:</label>
+          <input type="text" id="username" v-model="firstname" required />
         </div>
         <div class="form-group">
           <label for="email">Email:</label>
