@@ -30,31 +30,33 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>Question</th>
+              <th>Question Text</th>
               <th>Answer</th>
+              <th>Latiude of Capital</th>
+              <th>Latiude of Capital</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(cafe, index) in cafes" :key="index">
-              <td>{{ cafe.id }}</td>
-              <td>{{ cafe.cafe_name }}</td>
-              <td>{{ cafe.cafe_lat }}</td>
-              <td>{{ cafe.cafe_lon }}</td>
-              <td>{{ cafe.cafe_desc }}</td>
+            <tr v-for="(question, index) in questions" :key="index">
+              <td>{{ question.id }}</td>
+              <td>{{ question.qtext }}</td>
+              <td>{{ question.answer }}</td>
+              <td>{{ question.lat }}</td>
+              <td>{{ question.lon }}</td>
               <td>
-                <RouterLink :to="'cafes/' + cafe.id + '/edit'" class="btn btn-success">
+                <RouterLink :to="'question/edit/' + question.id" class="btn btn-success">
                   Edit
                 </RouterLink>
-                <button type="button" @click="deleteCafe(cafe.id)" class="btn btn-danger">
+                <button type="button" @click="deleteQuestion(question.id)" class="btn btn-danger">
                   Delete
                 </button>
               </td>
             </tr>
           </tbody>
-          <tbody v-if="cafes.length === 0">
+          <tbody v-if="questions.length === 0">
             <tr>
-              <td colspan="6">No data available or loading...</td>
+              <td colspan="4">No data available or loading...</td>
             </tr>
           </tbody>
         </table>
@@ -67,31 +69,31 @@
 import axios from 'axios';
 
 export default {
-  name: 'Cafes',
+  name: 'Questions',
   data() {
     return {
-      cafes: [],
+      questions: [],
       successMessage: "",
     };
   },
   mounted() {
-    this.getCafes();
+    this.getQuestions();
   },
   methods: {
-    getCafes() {
-      axios.get('http://localhost:3300/cafes').then(res => {
-        this.cafes = res.data;
+    getQuestions() {
+      axios.get('http://localhost:3300/questions').then(res => {
+        this.questions = res.data;
       });
     },
-    deleteCafe(cafeID) {
-      axios.delete(`http://localhost:3300/cafes/${cafeID}`)
+    deleteQuestion(questionID) {
+      axios.delete(`http://localhost:3300/questions/${questionID}`)
         .then(res => {
-          this.successMessage = 'Cafe successfully deleted.';
-          this.getCafes();
+          this.successMessage = 'Question successfully deleted.';
+          this.getQuestions();
         })
         .catch(error => {
-          console.error('Error deleting cafe:', error);
-          this.successMessage = 'Error deleting cafe.';
+          console.error('Error deleting question:', error);
+          this.successMessage = 'Error deleting question.';
         });
     }
   }

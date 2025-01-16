@@ -19,7 +19,7 @@
         <div class="card-body">
           <div class="mb-3">
             <label for="userName">Username</label>
-            <input type="text" v-model="model.firstname" class="form-control" />
+            <input type="text" v-model="model.username" class="form-control" />
           </div>
           <div class="mb-3">
             <label for="email">Email</label>
@@ -73,3 +73,4 @@
     }
   }
   </script>
+  

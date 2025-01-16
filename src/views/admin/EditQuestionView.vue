@@ -1,5 +1,5 @@
 <template>
-    <header>
+  <header>
     <div class="wrapper">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -11,88 +11,84 @@
       </nav>
     </div>
   </header>
-    <div class="container">
-      <div class="card">
-        <div class="card-header">
-          <h4>Edit Place</h4>
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h4>Edit Question</h4>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label for="question">Question</label>
+          <input type="text" v-model="model.qtext" id="qtext" class="form-control" />
         </div>
-        <div class="card-body">
-          <div class="mb-3">
-            <label for="question">Question</label>
-            <input type="text" v-model="model.cafe_name" id="cafeName" class="form-control" />
-          </div>
-          <div class="mb-3">
-            <label for="answer">Answe of Question</label>
-            <input type="text" v-model="model.cafe_lat" id="cafeLat" class="form-control" />
-          </div>
-          <div class="mb-3">
-            <button type="button" @click="updateCafe" class="btn btn-primary">Save</button>
-          </div>
+        <div class="mb-3">
+          <label for="answer">Answer</label>
+          <input type="text" v-model="model.answer" id="answer" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <button type="button" @click="updateQuestion" class="btn btn-primary">Save</button>
+        </div>
         <div v-if="successMessage" class="alert alert-success">
-            {{ successMessage }}
-          </div>
+          {{ successMessage }}
         </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  
-  export default {
-    name: 'CafeEdit',
-    data() {
-      return {
-        CafeID: "",
-        model: {
-          id: "",
-          cafe_name: "",
-          cafe_lat: "",
-          cafe_lon: "",
-          cafe_desc: "",
-        },
-        successMessage: "",
-      };
-    },
-  
-    mounted() {
-      this.CafeID = this.$route.params.id;
-      this.getCafeData(this.CafeID);
-    },
-  
-    methods: {
-      getCafeData(cafeID) {
-        axios.get(`http://localhost:3300/cafes/${cafeID}`)
-          .then(res => {
-            if (res.data) {
-              this.model.id = res.data.id;
-              this.model.cafe_name = res.data.cafe_name;
-              this.model.cafe_lat = res.data.cafe_lat;
-              this.model.cafe_lon = res.data.cafe_lon;
-              this.model.cafe_desc = res.data.cafe_desc;
-            }
-          })
-          .catch(error => {
-            console.error('Error fetching cafe data:', error);
-          });
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  name: 'QuestionEdit',
+  data() {
+    return {
+      questionID: "",
+      model: {
+        id: "",
+        qtext: "",
+        answer: "",
       },
-  
-      updateCafe() {
-        if (!this.CafeID) {
-          console.error('Cafe ID is undefined.');
-          return;
-        }
-  
-        axios.put(`http://localhost:3300/cafes/${this.CafeID}`, this.model)
-          .then(res => {
-            console.log('Cafe updated successfully:', res.data);
-            this.successMessage = 'Place successfully updated.';
-          })
-          .catch(error => {
-            console.error('Cafe update error:', error);
-            this.successMessage = 'Error updating cafe.';
-          });
-      },
+      successMessage: "",
+    };
+  },
+
+  mounted() {
+    this.questionID = this.$route.params.id;
+    this.getQuestionData(this.questionID);
+  },
+
+  methods: {
+    getQuestionData(questionID) {
+      axios.get(`http://localhost:3300/questions/${questionID}`)
+        .then(res => {
+          if (res.data) {
+            this.model.id = res.data.id;
+            this.model.qtext = res.data.qtext;
+            this.model.answer = res.data.answer;
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching question data:', error);
+        });
     },
-  };
-  </script>
+
+    updateQuestion() {
+      if (!this.questionID) {
+        console.error('Question ID is undefined.');
+        return;
+      }
+
+      axios.put(`http://localhost:3300/questions/${this.questionID}`, this.model)
+        .then(res => {
+          console.log('Question updated successfully:', res.data);
+          this.successMessage = 'Question successfully updated.';
+        })
+        .catch(error => {
+          console.error('Question update error:', error);
+          this.successMessage = 'Error updating question.';
+        });
+    },
+  },
+};
+</script>

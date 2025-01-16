@@ -18,8 +18,8 @@
       </div>
       <div class="card-body">
         <div class="mb-3">
-          <label for="userName">Firstname</label>
-          <input type="text" v-model="model.firstname" id="firstName" class="form-control" />
+          <label for="userName">Username</label>
+          <input type="text" v-model="model.username" id="userName" class="form-control" />
         </div>
         <div class="mb-3">
           <label for="email">Email</label>
@@ -50,8 +50,7 @@ export default {
       UserID: "",
       model: {
         id: "",
-        firstname: "",
-        lastname: "",
+        username: "",
         email: "",
         password: "",
       },
@@ -70,8 +69,7 @@ export default {
         .then(res => {
           if (res.data) {
             this.model.id = res.data.id;
-            this.model.firstname = res.data.firstname;
-            this.model.lastname = res.data.lastname;
+            this.model.username = res.data.username;
             this.model.email = res.data.email;
             this.model.password = res.data.password;
           }

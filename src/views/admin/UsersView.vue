@@ -25,12 +25,21 @@
         <div v-if="successMessage" class="alert alert-success" role="alert">
           {{ successMessage }}
         </div>
-        <table class="table table-bordered">
+        <div v-if="errorMessage" class="alert alert-danger" role="alert">
+          {{ errorMessage }}
+        </div>
+        <div v-if="isLoading" class="text-center my-3">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <table class="table table-bordered" v-if="!isLoading">
           <thead>
             <tr>
               <th>ID</th>
               <th>Username</th>
               <th>Email</th>
+              <th>Password</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -39,11 +48,12 @@
               <td>{{ user.id }}</td>
               <td>{{ user.username }}</td>
               <td>{{ user.email }}</td>
+              <td>{{ user.password }}</td>
               <td>
-                <RouterLink :to="'users/' + user.id + '/edit'" class="btn btn-success">
+                <RouterLink :to="'/admin/user/edit/' + user.id" class="btn btn-success">
                   Edit
                 </RouterLink>
-                <button type="button" @click="deleteUser(user.id)" class="btn btn-danger">
+                <button type="button" @click="confirmDelete(user.id)" class="btn btn-danger">
                   Delete
                 </button>
               </td>
@@ -51,7 +61,7 @@
           </tbody>
           <tbody v-if="users.length === 0">
             <tr>
-              <td colspan="5">No data available or loading...</td>
+              <td colspan="4" class="text-center">No data available or loading...</td>
             </tr>
           </tbody>
         </table>
@@ -69,28 +79,51 @@ export default {
     return {
       users: [],
       successMessage: "",
+      errorMessage: "",
+      isLoading: true,
     };
   },
   mounted() {
     this.getUsers();
   },
   methods: {
-    getUsers() {
-      axios.get('http://localhost:3300/users').then(res => {
-        this.users = res.data;
-      });
+    async getUsers() {
+      try {
+        this.isLoading = true;
+        const response = await axios.get('http://localhost:3300/users');
+        this.users = response.data;
+        this.isLoading = false;
+      } catch (error) {
+        console.error('Error fetching users:', error);
+        this.errorMessage = 'Error fetching users. Please try again later.';
+        this.isLoading = false;
+      }
     },
-    deleteUser(userID) {
-      axios.delete(`http://localhost:3300/users/${userID}`)
-        .then(res => {
-          this.successMessage = 'User successfully deleted.';
-          this.getUsers();
-        })
-        .catch(error => {
-          console.error('Error deleting user:', error);
-          this.successMessage = 'Error deleting user.';
-        });
-    }
-  }
+    async deleteUser(userID) {
+      try {
+        await axios.delete(`http://localhost:3300/users/${userID}`);
+        this.successMessage = 'User successfully deleted.';
+        this.getUsers();
+      } catch (error) {
+        console.error('Error deleting user:', error);
+        this.errorMessage = 'Error deleting user. Please try again later.';
+      }
+    },
+    confirmDelete(userID) {
+      if (confirm('Are you sure you want to delete this user?')) {
+        this.deleteUser(userID);
+      }
+    },
+  },
 };
 </script>
+
+<style>
+.container {
+  margin-top: 20px;
+}
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+</style>

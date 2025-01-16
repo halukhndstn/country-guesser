@@ -1,4 +1,9 @@
 <template>
+  <h1>
+      <a class="logo" id="reloadPage" href="/">
+          <span>Country</span>Guesser
+      </a>
+    </h1>
   <div class="container-1">
     <h2>Login</h2>
     <form @submit.prevent="submitForm">
@@ -13,10 +18,14 @@
       <input type="submit" value="Login" />
     </form>
     <div class="register-link">
-      <p>Not a member? <a>Sign Up</a></p>
+      <br/>
+      <p>
+        Not a member? 
+        <a @click="goToRegister">Sign Up</a>
+      </p>
     </div>
-    <button class="admin-button" @click="openAdminLogin">Admin Login</button>
   </div>
+  <button class="admin-button" @click="openAdminLogin">Admin Login</button>
 </template>
 
 <script>
@@ -54,11 +63,15 @@ export default {
         });
     },
     openAdminLogin() {
-      window.location.href = './admin.html';
+      window.location.href = '/admin-login';
+    },
+    goToRegister() {
+      window.location.href = '/register';
     }
   }
 };
 </script>
+
 
 <style scoped>
 * {
@@ -69,8 +82,25 @@ export default {
     text-decoration: none;
     list-style: none;
 }
-
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #639f38;
+}
+span {
+    color: #154b6b;
+    font-weight: 600;
+}
+.logo {
+    font-size: 25px;
+    color: #639f38;
+    font-weight: 600;
+}
 .container-1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 350px;
   background-color: #fff;
   padding: 40px;

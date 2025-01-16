@@ -28,7 +28,6 @@ body {
 }
 
 .logo {
-    
     font-size: 25px;
     color: #F5F5F5;
     font-weight: 600;
@@ -36,6 +35,7 @@ body {
 
 span {
     color: #154b6b;
+    font-weight: 600;
 }
 
 .animated-text {
