@@ -55,6 +55,7 @@
       Failed to add user: {{ errorMessage }}
     </div>
   </div>
+  <button class="back-button" @click="backToLoginPage">Back to Login Page</button>
 </template>
 
 <script>
@@ -104,5 +105,8 @@ export default {
         });
     },
   },
+  backToLoginPage() {
+      window.location.href = '/';
+    }
 };
 </script>

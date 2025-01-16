@@ -34,7 +34,7 @@
           <input type="number" v-model="model.longitude" id="longitude" class="form-control" />
         </div>
         <div class="mb-3">
-          <button type="button" @click="updateQuestion" class="btn btn-primary">Save</button>
+          <button type="button" @click="updateQuestion" class="btn custom-save-btn">Save</button>
         </div>
         <div v-if="successMessage" class="alert alert-success">
           {{ successMessage }}
@@ -42,6 +42,7 @@
       </div>
     </div>
   </div>
+  <button class="back-button" @click="backToLoginPage">Back to Login Page</button>
 </template>
 
 
@@ -102,6 +103,9 @@ export default {
           this.successMessage = 'Error updating question.';
         });
     },
+    backToLoginPage() {
+      window.location.href = '/';
+    }
   },
 };
 </script>

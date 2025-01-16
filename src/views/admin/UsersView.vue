@@ -70,6 +70,7 @@
       </div>
     </div>
   </div>
+  <button class="back-button" @click="backToLoginPage">Back to Login Page</button>
 </template>
 
 
@@ -116,6 +117,9 @@ export default {
       if (confirm('Are you sure you want to delete this user?')) {
         this.deleteUser(userID);
       }
+    },
+    backToLoginPage() {
+      window.location.href = '/';
     },
   },
 };

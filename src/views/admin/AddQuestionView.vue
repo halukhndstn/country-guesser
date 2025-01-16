@@ -34,7 +34,7 @@
           <input type="text" v-model="model.longitude" class="form-control" />
         </div>
         <div class="mb-3">
-          <button type="button" @click="saveQuestion" class="btn btn-primary">Save</button>
+          <button type="button" @click="saveQuestion" class="bbtn custom-save-btn">Save</button>
         </div>
       </div>
     </div>
@@ -42,6 +42,7 @@
       Question successfully added!
     </div>
   </div>
+  <button class="back-button" @click="backToLoginPage">Back to Login Page</button>
 </template>
 
 <script>
@@ -77,6 +78,9 @@ export default {
           console.error('Question add error:', error);
         });
     },
+    backToLoginPage() {
+      window.location.href = '/';
+    }
   },
 };
 </script>

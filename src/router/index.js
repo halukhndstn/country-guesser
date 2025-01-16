@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import AdminLoginView from '../views/AdminLoginView.vue'
+import AdminView from '../views/admin/AdminView.vue'
 import UsersView from '../views/admin/UsersView.vue'
 import AddUserView from '../views/admin/AddUserView.vue'
 import EditUserView from '../views/admin/EditUserView.vue'
@@ -33,8 +34,13 @@ const router = createRouter({
       component: () => window.location.href = '../public/index.html',
     },
     {
-      path: '/admin/users',
+      path: '/admin',
       name: 'admin',
+      component: AdminView
+    },
+    {
+      path: '/admin/users',
+      name: 'admin-users',
       component: UsersView
     },
     {
