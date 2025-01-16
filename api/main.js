@@ -34,8 +34,12 @@ app.get('/questions/:id', async (req, res) => {
 
 app.post('/questions', async (req, res) => {
   try {
-    const { qtext, answer } = req.body;
-    const result = await pool.query('INSERT INTO public.question (qtext, answer) VALUES ($1, $2) RETURNING *', [qtext, answer]);
+    const { qtext, answer, latitude, longitude } = req.body;
+
+    const result = await pool.query(
+      'INSERT INTO public.question (qtext, answer, latitude, longitude, geom) VALUES ($1, $2, $3, $4, ST_SetSRID(ST_MakePoint($4, $3), 4326)) RETURNING *',
+      [qtext, answer, latitude, longitude]
+    );
     res.status(201).json(result.rows[0]);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -45,8 +49,13 @@ app.post('/questions', async (req, res) => {
 app.put('/questions/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { qtext, answer } = req.body;
-    const result = await pool.query('UPDATE public.question SET qtext = $1, answer = $2 WHERE id = $3 RETURNING *', [qtext, answer, id]);
+    const { qtext, answer, latitude, longitude } = req.body;
+
+    const result = await pool.query(
+      'UPDATE public.question SET qtext = $1, answer = $2, latitude = $3, longitude = $4, geom = ST_SetSRID(ST_MakePoint($4, $3), 4326) WHERE id = $5 RETURNING *',
+      [qtext, answer, latitude, longitude, id]
+    );
+
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Question not found' });
     }
@@ -55,6 +64,7 @@ app.put('/questions/:id', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 app.delete('/questions/:id', async (req, res) => {
   try {

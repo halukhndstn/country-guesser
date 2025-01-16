@@ -16,7 +16,7 @@
       <div class="card-header">
         <h4>
           Users
-          <RouterLink to="/admin/user/add" class="btn btn-primary float-end">
+          <RouterLink to="/admin/user/add" class="btn float-end add-user-btn">
             Add User
           </RouterLink>
         </h4>
@@ -40,6 +40,7 @@
               <th>Username</th>
               <th>Email</th>
               <th>Password</th>
+              <th>is Admin?</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -49,8 +50,9 @@
               <td>{{ user.username }}</td>
               <td>{{ user.email }}</td>
               <td>{{ user.password }}</td>
+              <td>{{ user.isadmin }}</td>
               <td>
-                <RouterLink :to="'/admin/user/edit/' + user.id" class="btn btn-success">
+                <RouterLink :to="'/admin/user/edit/' + user.id" class="btn edit-btn">
                   Edit
                 </RouterLink>
                 <button type="button" @click="confirmDelete(user.id)" class="btn btn-danger">
@@ -61,7 +63,7 @@
           </tbody>
           <tbody v-if="users.length === 0">
             <tr>
-              <td colspan="4" class="text-center">No data available or loading...</td>
+              <td colspan="5" class="text-center">No data available or loading...</td>
             </tr>
           </tbody>
         </table>
@@ -69,6 +71,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import axios from 'axios';

@@ -48,7 +48,7 @@ import { RouterLink, RouterView } from 'vue-router'
   }
 
   .navbar {
-  background-color: #639f38 !important;
+  background-color: #154b6b !important;
   color: #ffffff;
 }
 
@@ -57,6 +57,82 @@ import { RouterLink, RouterView } from 'vue-router'
 }
 
 .navbar a:hover {
-  color: #FFD700 !important; 
+  color:  #639f38 !important; 
+}
+
+.add-question-btn {
+  background-color: #154b6b;
+  color: white;
+  border: none;
+}
+
+.add-question-btn:hover {
+  background-color: #123b58; 
+  color: white;
+}
+
+.edit-btn {
+  background-color: #639f38;
+  color: white;
+  border: none;
+}
+
+.edit-btn:hover {
+  background-color: #527d2f; 
+  color: white;
+}
+
+.geojson-btn {
+  background-color: #fea501;
+  color: white;
+  border: none;
+}
+
+.geojson-btn:hover {
+  background-color: #c07d02; 
+  color: white;
+}
+
+.add-user-btn {
+  background-color: #154b6b;
+  color: white;
+  border: none;
+}
+
+.add-user-btn:hover {
+  background-color: #123b58; 
+  color: white;
+}
+
+.edit-btn {
+  background-color: #639f38;
+  color: white;
+  border: none;
+}
+
+.edit-btn:hover {
+  background-color: #527d2f; 
+  color: white;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333; 
+  color: white;
+}
+.custom-save-btn {
+  background-color: #639f38;
+  color: white;
+  border: none;
+}
+
+.custom-save-btn:hover {
+  background-color: #4a7528;
+  color: white;
+  cursor: pointer;
 }
 </style>

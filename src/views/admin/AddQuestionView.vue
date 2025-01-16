@@ -26,6 +26,14 @@
           <input type="text" v-model="model.answer" class="form-control" />
         </div>
         <div class="mb-3">
+          <label for="latiude">Latitude of Capital</label>
+          <input type="text" v-model="model.latitude" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label for="longitude">Longitude of Capital</label>
+          <input type="text" v-model="model.longitude" class="form-control" />
+        </div>
+        <div class="mb-3">
           <button type="button" @click="saveQuestion" class="btn btn-primary">Save</button>
         </div>
       </div>

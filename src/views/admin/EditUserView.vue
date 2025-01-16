@@ -30,6 +30,13 @@
           <input type="text" v-model="model.password" id="password" class="form-control" />
         </div>
         <div class="mb-3">
+          <label for="isadmin">Is Admin</label>
+          <select v-model="model.isadmin" class="form-control">
+            <option :value="true">true</option>
+            <option :value="false">false</option>
+          </select>
+        </div>
+        <div class="mb-3">
           <button type="button" @click="updateUser" class="btn btn-primary">Save</button>
         </div>
         <div v-if="successMessage" class="alert alert-success">
@@ -72,6 +79,7 @@ export default {
             this.model.username = res.data.username;
             this.model.email = res.data.email;
             this.model.password = res.data.password;
+            this.model.isadmin = res.data.isadmin;
           }
         })
         .catch(error => {

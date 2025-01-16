@@ -26,6 +26,14 @@
           <input type="text" v-model="model.answer" id="answer" class="form-control" />
         </div>
         <div class="mb-3">
+          <label for="latitude">Latitude</label>
+          <input type="number" v-model="model.latitude" id="latitude" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label for="longitude">Longitude</label>
+          <input type="number" v-model="model.longitude" id="longitude" class="form-control" />
+        </div>
+        <div class="mb-3">
           <button type="button" @click="updateQuestion" class="btn btn-primary">Save</button>
         </div>
         <div v-if="successMessage" class="alert alert-success">
@@ -35,6 +43,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import axios from 'axios';
@@ -48,6 +57,8 @@ export default {
         id: "",
         qtext: "",
         answer: "",
+        latitude: "",
+        longitude: "",
       },
       successMessage: "",
     };
@@ -66,6 +77,8 @@ export default {
             this.model.id = res.data.id;
             this.model.qtext = res.data.qtext;
             this.model.answer = res.data.answer;
+            this.model.latitude = res.data.latitude;
+            this.model.longitude = res.data.longitude;
           }
         })
         .catch(error => {
