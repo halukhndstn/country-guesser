@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-1">
       <h2>Sign Up</h2>
       <form id="registrationForm" @submit.prevent="submitForm">
         <div class="form-group">
@@ -75,7 +75,7 @@
   body {
     background-color: #F5F5F5;
   }
-  .container {
+  .container-1 {
     width: 350px;
     background-color: #fff;
     padding: 40px;
@@ -122,4 +122,3 @@
     background-color: #154b6b;
   }
   </style>
-  

@@ -38,12 +38,12 @@ const router = createRouter({
       component: UsersView
     },
     {
-      path: '/admin/users/add',
+      path: '/admin/user/add',
       name: 'add-user',
       component: AddUserView
     },
     {
-      path: '/admin/users/edit/:id',
+      path: '/admin/user/edit/:id',
       name: 'edit-user',
       component: EditUserView
     },
@@ -53,12 +53,12 @@ const router = createRouter({
       component: QuestionsView
     },
     {
-      path: '/admin/questions/add',
+      path: '/admin/question/add',
       name: 'add-question',
       component: AddQuestionView
     },
     {
-      path: '/admin/questions/edit/:id',
+      path: '/admin/question/edit/:id',
       name: 'edit-question',
       component: EditQuestionView
     },

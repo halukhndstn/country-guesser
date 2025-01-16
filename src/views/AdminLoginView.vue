@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-1">
       <h2>Admin Girişi</h2>
       <form @submit.prevent="adminLogin">
         <div class="form-group">
@@ -71,7 +71,7 @@
     height: 100vh;
   }
   
-  .container {
+  .container-1 {
     position: relative;
     width: 350px;
     background-color: #fff;

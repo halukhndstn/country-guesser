@@ -4,8 +4,8 @@
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <div class="d-flex">
-            <RouterLink class="navbar-brand me-4" to="/cafes">Places</RouterLink>
-            <RouterLink class="navbar-brand" to="/users">Users</RouterLink>
+            <RouterLink class="navbar-brand me-4" to="/admin/questions">Questions</RouterLink>
+            <RouterLink class="navbar-brand" to="/admin/users">Users</RouterLink>
           </div>
         </div>
       </nav>
@@ -16,23 +16,20 @@
       <div class="card-header">
         <h4>
           Users
-          <RouterLink to="/users/add" class="btn btn-primary float-end">
+          <RouterLink to="/admin/user/add" class="btn btn-primary float-end">
             Add User
           </RouterLink>
         </h4>
       </div>
       <div class="card-body">
-        <!-- New notification div for success message -->
         <div v-if="successMessage" class="alert alert-success" role="alert">
           {{ successMessage }}
         </div>
-        
         <table class="table table-bordered">
           <thead>
             <tr>
               <th>ID</th>
-              <th>First Name</th>
-              <th>Last Name</th>
+              <th>Username</th>
               <th>Email</th>
               <th>Actions</th>
             </tr>
@@ -40,8 +37,7 @@
           <tbody>
             <tr v-for="(user, index) in users" :key="index">
               <td>{{ user.id }}</td>
-              <td>{{ user.firstname }}</td>
-              <td>{{ user.lastname }}</td>
+              <td>{{ user.username }}</td>
               <td>{{ user.email }}</td>
               <td>
                 <RouterLink :to="'users/' + user.id + '/edit'" class="btn btn-success">

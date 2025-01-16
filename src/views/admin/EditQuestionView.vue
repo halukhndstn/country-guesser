@@ -1,4 +1,16 @@
 <template>
+    <header>
+    <div class="wrapper">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <div class="d-flex">
+            <RouterLink class="navbar-brand me-4" to="/admin/questions">Questions</RouterLink>
+            <RouterLink class="navbar-brand" to="/admin/users">Users</RouterLink>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
     <div class="container">
       <div class="card">
         <div class="card-header">
@@ -6,25 +18,16 @@
         </div>
         <div class="card-body">
           <div class="mb-3">
-            <label for="cafeName">Name of Place</label>
+            <label for="question">Question</label>
             <input type="text" v-model="model.cafe_name" id="cafeName" class="form-control" />
           </div>
           <div class="mb-3">
-            <label for="cafeLat">Latitude of Place</label>
+            <label for="answer">Answe of Question</label>
             <input type="text" v-model="model.cafe_lat" id="cafeLat" class="form-control" />
-          </div>
-          <div class="mb-3">
-            <label for="cafeLon">Longitude of Place</label>
-            <input type="text" v-model="model.cafe_lon" id="cafeLon" class="form-control" />
-          </div>
-          <div class="mb-3">
-            <label for="cafeDesc">Description of Place</label>
-            <input type="text" v-model="model.cafe_desc" id="cafeDesc" class="form-control" />
           </div>
           <div class="mb-3">
             <button type="button" @click="updateCafe" class="btn btn-primary">Save</button>
           </div>
-          
         <div v-if="successMessage" class="alert alert-success">
             {{ successMessage }}
           </div>
@@ -93,4 +96,3 @@
     },
   };
   </script>
-  

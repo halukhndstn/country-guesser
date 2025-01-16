@@ -1,16 +1,27 @@
 <template>
+  <header>
+    <div class="wrapper">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <div class="d-flex">
+            <RouterLink class="navbar-brand me-4" to="/admin/questions">Questions</RouterLink>
+            <RouterLink class="navbar-brand" to="/admin/users">Users</RouterLink>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
   <div class="container">
     <div class="card">
       <div class="card-header">
         <h4>
-          Places
-          <RouterLink to="/cafes/add" class="btn btn-primary float-end">
-            Add Place
+          Questions
+          <RouterLink to="/admin/question/add" class="btn btn-primary float-end">
+            Add Question
           </RouterLink>
         </h4>
       </div>
       <div class="card-body">
-        <!-- Yeni eklenen bildirim div -->
         <div v-if="successMessage" class="alert alert-success" role="alert">
           {{ successMessage }}
         </div>
@@ -19,10 +30,8 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>Name</th>
-              <th>Latitude</th>
-              <th>Longitude</th>
-              <th>Description</th>
+              <th>Question</th>
+              <th>Answer</th>
               <th>Actions</th>
             </tr>
           </thead>

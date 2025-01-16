@@ -1,4 +1,16 @@
 <template>
+    <header>
+    <div class="wrapper">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <div class="d-flex">
+            <RouterLink class="navbar-brand me-4" to="/admin/questions">Questions</RouterLink>
+            <RouterLink class="navbar-brand" to="/admin/users">Users</RouterLink>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
     <div class="container">
       <div class="card">
         <div class="card-header">
@@ -6,12 +18,8 @@
         </div>
         <div class="card-body">
           <div class="mb-3">
-            <label for="firstname">Firstname</label>
+            <label for="userName">Username</label>
             <input type="text" v-model="model.firstname" class="form-control" />
-          </div>
-          <div class="mb-3">
-            <label for="lastname">Lastname</label>
-            <input type="text" v-model="model.lastname" class="form-control" />
           </div>
           <div class="mb-3">
             <label for="email">Email</label>
@@ -65,4 +73,3 @@
     }
   }
   </script>
-  

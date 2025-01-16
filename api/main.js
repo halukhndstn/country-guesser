@@ -9,7 +9,6 @@ const port = 3300;
 app.use(bodyParser.json());
 app.use(cors());
 
-
 app.get('/questions', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM question');

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-1">
     <h2>Login</h2>
     <form @submit.prevent="submitForm">
       <div class="form-group">
@@ -70,7 +70,7 @@ export default {
     list-style: none;
 }
 
-.container {
+.container-1 {
   width: 350px;
   background-color: #fff;
   padding: 40px;

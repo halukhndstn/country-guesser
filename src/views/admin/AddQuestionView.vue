@@ -1,8 +1,20 @@
 <template>
+    <header>
+    <div class="wrapper">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <div class="d-flex">
+            <RouterLink class="navbar-brand me-4" to="/admin/questions">Questions</RouterLink>
+            <RouterLink class="navbar-brand" to="/admin/users">Users</RouterLink>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
     <div class="container">
       <div class="card">
         <div class="card-header">
-          <h4>Add Place</h4>
+          <h4>Add Question</h4>
         </div>
         <div class="card-body">
           <div class="mb-3">
@@ -10,28 +22,18 @@
             <input type="text" v-model="model.id" class="form-control" />
           </div>
           <div class="mb-3">
-            <label for="">Name</label>
+            <label for="">Question</label>
             <input type="text" v-model="model.cafe_name" class="form-control" />
           </div>
           <div class="mb-3">
-            <label for="">Latitude</label>
+            <label for="">Answer</label>
             <input type="text" v-model="model.cafe_lat" class="form-control" />
-          </div>
-          <div class="mb-3">
-            <label for="">Longitude</label>
-            <input type="text" v-model="model.cafe_lon" class="form-control" />
-          </div>
-          <div class="mb-3">
-            <label for="">Description</label>
-            <input type="text" v-model="model.cafe_desc" class="form-control" />
-          </div>
+          </div>   
           <div class="mb-3">
             <button type="button" @click="saveCafes" class="btn btn-primary">Save</button>
           </div>
         </div>
       </div>
-      
-      
       <div v-if="showSuccessMessage" class="alert alert-success mt-3">
         Cafe successfully added!
       </div>
@@ -80,4 +82,3 @@
     },
   };
   </script>
-  
