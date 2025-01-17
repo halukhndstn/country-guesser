@@ -26,6 +26,7 @@ A map-based WEB game where users answer location questions (capitals or tourist 
 ## Project Structure
 - **Vue.js**: A modern JavaScript framework used for user interface development.
 - **Leaflet**: A lightweight and powerful JavaScript library used for map visualization.
+- **Bootstrap**: A popular CSS framework used to provide a user-friendly and responsive design.
 - **Node.js**: A JavaScript runtime environment used as an API layer.
 - **PostgreSQL + PostGIS**: An open source relational database system that supports geographic data management and queries.
 - **Nominatim**: An API for OpenStreetMap based location searching and geocoding.
