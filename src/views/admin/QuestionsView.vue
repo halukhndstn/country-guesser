@@ -8,6 +8,7 @@
             <RouterLink class="navbar-brand" to="/admin/users">Users</RouterLink>
           </div>
         </div>
+        <a href="/" id="logOut" class="logOut">Log Out</a>
       </nav>
     </div>
   </header>
@@ -68,10 +69,7 @@
       </div>
     </div>
   </div>
-  <button class="back-button" @click="backToLoginPage">Back to Login Page</button>
 </template>
-
-
 
 <script>
 import axios from 'axios';

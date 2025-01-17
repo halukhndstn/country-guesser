@@ -8,6 +8,7 @@
             <RouterLink class="navbar-brand" to="/admin/users">Users</RouterLink>
           </div>
         </div>
+        <a href="/" id="logOut" class="logOut">Log Out</a>
       </nav>
     </div>
   </header>
@@ -26,17 +27,48 @@
           <p></p>
         </div>
       </div>
-      <button class="back-button" @click="backToLoginPage">Back to Login Page</button>
     </main>
   </template>
 
   <script>
 export default {
-  methods: {
-    backToLoginPage() {
-      window.location.href = '/';
+    methods: {
+  async adminLogin() {
+    const loginData = {
+      email: this.email,
+      password: this.password,
+    };
+
+    try {
+      const response = await fetch('http://localhost:3300/adminlogin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error);
+      }
+
+      const data = await response.json();
+      window.location.href = data.redirect;
+    } catch (error) {
+      console.error('Login Error:', error.message);
+
+      if (error.message === 'You do not have permission for admin login.') {
+        alert('You do not have permission for admin login.');
+      } else {
+        alert('Login failed. Please check your email and password.');
+      }
     }
-  }
+  },
+  backToLoginPage() {
+    window.location.href = '/';
+  },
+}
 }
 </script>
   

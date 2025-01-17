@@ -6,6 +6,7 @@ let timerInterval = null;
 let totalQuestions = 10;
 let questionsAnswered = 0;
 let passRights = 3;
+const apiUrl = 'http://localhost:3300/questions';
 
 document.addEventListener("DOMContentLoaded", () => {
     const animatedText = document.getElementById("animatedText");
@@ -26,7 +27,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 500);
 
     hideQuestionCard();
+    fetchQuestionsFromAPI(); 
 });
+
+function fetchQuestionsFromAPI() {
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            questions = data;
+        })
+        .catch(error => {
+            console.error("Error fetching questions from API:", error);
+        });
+}
+
+function updateGameInfo() {
+    document.getElementById('score').innerText = `Score: ${score}`;
+    document.getElementById('time').innerText = `Time: ${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, '0')}`;
+    document.getElementById('questionNumber').innerText = `Questions: ${questionsAnswered}/${totalQuestions}`;
+}
 
 document.getElementById('startGame').addEventListener('click', (e) => {
     e.preventDefault();
@@ -71,25 +90,6 @@ function startNewGame() {
     }
 }
 
-fetch('./data/questions.json')
-    .then(response => response.json())
-    .then(data => questions = data);
-
-document.getElementById('submitAnswer').addEventListener('click', checkSelectedPoint);
-document.getElementById('passQuestion').addEventListener('click', passQuestion);
-
-function showQuestionCard() {
-    document.getElementById('questionCard').classList.remove('hidden');
-    document.getElementById('submitAnswer').classList.remove('hidden');
-    document.getElementById('passQuestion').classList.remove('hidden');
-}
-
-function hideQuestionCard() {
-    document.getElementById('questionCard').classList.add('hidden');
-    document.getElementById('submitAnswer').classList.add('hidden');
-    document.getElementById('passQuestion').classList.add('hidden');
-}
-
 function startTimer() {
     if (timerInterval) clearInterval(timerInterval);
     timerInterval = setInterval(() => {
@@ -104,10 +104,16 @@ function startTimer() {
     }, 1000);
 }
 
-function updateGameInfo() {
-    document.getElementById('score').innerText = `Score: ${score}`;
-    document.getElementById('time').innerText = `Time: ${Math.floor(timeLeft / 60)}:${String(timeLeft % 60).padStart(2, '0')}`;
-    document.getElementById('questionNumber').innerText = `Questions: ${questionsAnswered}/${totalQuestions}`;
+function showQuestionCard() {
+    document.getElementById('questionCard').classList.remove('hidden');
+    document.getElementById('submitAnswer').classList.remove('hidden');
+    document.getElementById('passQuestion').classList.remove('hidden');
+}
+
+function hideQuestionCard() {
+    document.getElementById('questionCard').classList.add('hidden');
+    document.getElementById('submitAnswer').classList.add('hidden');
+    document.getElementById('passQuestion').classList.add('hidden');
 }
 
 function nextQuestion() {
@@ -118,7 +124,12 @@ function nextQuestion() {
     }
     questionsAnswered++;
     currentQuestion = questions.splice(Math.floor(Math.random() * questions.length), 1)[0];
-    displayQuestion(currentQuestion.question);
+    if (!currentQuestion) {
+        alert("No more questions available.");
+        endGame();
+        return;
+    }
+    displayQuestion(currentQuestion.qtext);
     updateGameInfo();
 }
 
@@ -126,31 +137,47 @@ function displayQuestion(questionText) {
     document.getElementById('questionContent').innerText = questionText || "No question available.";
 }
 
-function checkSelectedPoint() {
-    if (!selectedPoint) {
-        alert("Select a point on the map first!");
-        return;
-    }
-}
+document.getElementById('passQuestion').addEventListener('click', passQuestion);
+
+document.getElementById('submitAnswer').addEventListener('click', checkSelectedPoint);
 
 function passQuestion() {
     if (passRights > 0) {
         passRights--;
         updatePassButton();
-        currentQuestion = questions.splice(Math.floor(Math.random() * questions.length), 1)[0];
-        displayQuestion(currentQuestion.question);
+
+        if (questions.length > 0) {
+            currentQuestion = questions.splice(Math.floor(Math.random() * questions.length), 1)[0];
+            displayQuestion(currentQuestion.qtext);
+        } else {
+            alert("No more questions to pass to!");
+            endGame();
+        }
+    } else {
+        alert("No pass rights remaining!");
     }
 }
 
 function updatePassButton() {
     const passButton = document.getElementById('passQuestion');
     passButton.innerText = `Pass Question (${passRights} left)`;
+
     if (passRights <= 0) {
         passButton.classList.add('disabled');
         passButton.disabled = true;
+    } else {
+        passButton.classList.remove('disabled');
+        passButton.disabled = false;
     }
 }
 
 function endGame() {
     location.reload();
+}
+
+function checkSelectedPoint() {
+    if (!selectedPoint) {
+        alert("Select a point on the map first!");
+        return;
+    }
 }

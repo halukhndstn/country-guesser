@@ -37,30 +37,32 @@ export default {
     };
   },
   methods: {
-    submitForm() {
+    async submitForm() {
       const loginData = {
         email: this.email,
         password: this.password
       };
 
-      fetch('http://localhost/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(loginData),
-      })
-        .then(response => {
-          if (response.ok) {
-            window.location.href = '../index.html';
-          } else {
-            throw new Error('Invalid email or password');
-          }
-        })
-        .catch(error => {
-          console.error('Login Error:', error);
-          alert('Login failed. Please check your email and password.');
+      try {
+        const response = await fetch('http://localhost:3300/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(loginData),
         });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Login failed');
+        }
+
+        const data = await response.json();
+        window.location.href = '/index.html';
+      } catch (error) {
+        console.error('Login Error:', error);
+        alert('Login failed. Please check your email and password.');
+      }
     },
     openAdminLogin() {
       window.location.href = '/admin-login';
@@ -71,7 +73,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped>
 * {

@@ -50,14 +50,11 @@ import { RouterLink, RouterView } from 'vue-router'
   .navbar {
   background-color: #154b6b !important;
   color: #ffffff;
+  height: 70px;
 }
 
 .navbar a {
   color: #ffffff !important;
-}
-
-.navbar a:hover {
-  color:  #639f38 !important; 
 }
 
 .add-question-btn {
@@ -135,4 +132,30 @@ import { RouterLink, RouterView } from 'vue-router'
   color: white;
   cursor: pointer;
 }
+
+.logOut {
+    position: absolute;
+    top: 50%; 
+    right: 80px; 
+    transform: translateY(-50%);
+    padding: 10px 28px;
+    background-color: #639f38;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-size: 19px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    transition: 0.3s ease;
+    margin-left: auto;
+    text-decoration: none;
+    z-index:1;
+}
+
+.logOut:hover {
+    box-shadow: 0 0 25px #4a7528;
+    color: white !important;
+}
+
+
 </style>

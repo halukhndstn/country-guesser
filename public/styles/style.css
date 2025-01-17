@@ -57,6 +57,22 @@ span {
 }
 
 .startGame {
+    position: fixed; 
+    bottom: 20px;    
+    right: 20px;     
+    padding: 10px 28px;
+    background-color: #154b6b;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-size: 19px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    transition: 0.3s ease;
+    z-index: 10000;
+}
+
+.logOut {
     position: absolute;
     top: 50%; 
     right: 80px; 
@@ -72,6 +88,16 @@ span {
     transition: 0.3s ease;
     margin-left: auto;
 }
+
+.logOut:hover {
+    box-shadow: 0 0 25px #154b6b;
+}
+
+
+.startGame:hover {
+    box-shadow: 0 0 25px #154b6b;
+}
+
 
 .startGame:hover {
     box-shadow: 0 0 25px #154b6b;

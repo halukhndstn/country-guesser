@@ -8,6 +8,7 @@
             <RouterLink class="navbar-brand" to="/admin/users">Users</RouterLink>
           </div>
         </div>
+        <a href="/" id="logOut" class="logOut">Log Out</a>
       </nav>
     </div>
   </header>
@@ -26,11 +27,11 @@
           <input type="text" v-model="model.answer" id="answer" class="form-control" />
         </div>
         <div class="mb-3">
-          <label for="latitude">Latitude</label>
+          <label for="latitude">Latitude of Capital</label>
           <input type="number" v-model="model.latitude" id="latitude" class="form-control" />
         </div>
         <div class="mb-3">
-          <label for="longitude">Longitude</label>
+          <label for="longitude">Longitude of Capital</label>
           <input type="number" v-model="model.longitude" id="longitude" class="form-control" />
         </div>
         <div class="mb-3">
@@ -42,7 +43,6 @@
       </div>
     </div>
   </div>
-  <button class="back-button" @click="backToLoginPage">Back to Login Page</button>
 </template>
 
 

@@ -57,7 +57,7 @@ export default {
         })
         .then((data) => {
           alert('Registration completed successfully.');
-          window.location.href = '/login';
+          window.location.href = '/';
         })
         .catch((error) => {
           console.error('Error:', error);
