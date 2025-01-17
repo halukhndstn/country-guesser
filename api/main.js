@@ -152,15 +152,18 @@ app.delete('/users/:id', async (req, res) => {
 
 app.post('/adminlogin', async (req, res) => {
   const { email, password } = req.body;
-
+  console.log('Gelen şifre:', password);
   try {
     const result = await pool.query('SELECT * FROM public.user WHERE email = $1', [email]);
     const user = result.rows[0];
+    console.log('User found:', user);
 
     if (!user) {
+      console.log('Invalid email');
       return res.status(401).json({ error: 'Invalid email or password.' });
     }
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log('Password match:', isMatch);
 
     if (!isMatch) {
       return res.status(401).json({ error: 'Invalid email or password.' });
@@ -172,6 +175,7 @@ app.post('/adminlogin', async (req, res) => {
 
     res.json({ message: 'Login successful', redirect: '/admin' });
   } catch (error) {
+    console.error('Login error:', error);
     res.status(500).json({ error: 'An error occurred during login.' });
   }
 });
