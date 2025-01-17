@@ -68,11 +68,11 @@ export default {
 
   mounted() {
     this.UserID = this.$route.params.id;
-    this.getCafeData(this.UserID);
+    this.getUserData(this.UserID);
   },
 
   methods: {
-    getCafeData(UserID) {
+    getUserData(UserID) {
       axios.get(`http://localhost:3300/users/${UserID}`)
         .then(res => {
           if (res.data) {
@@ -89,21 +89,27 @@ export default {
     },
 
     updateUser() {
-      if (!this.UserID) {
-        console.error('User ID is undefined.');
-        return;
-      }
+  if (!this.UserID) {
+    console.error('User ID is undefined.');
+    return;
+  }
 
-      axios.put(`http://localhost:3300/users/${this.UserID}`, this.model)
-        .then(res => {
-          console.log('User updated successfully:', res.data);
-          this.successMessage = 'User successfully updated.';
-        })
-        .catch(error => {
-          console.error('User update error:', error);
-          this.successMessage = 'Error updating user.';
-        });
-    },
+  const payload = {
+    ...this.model,
+    password: this.model.password || undefined, 
+  };
+
+  axios.put(`http://localhost:3300/users/${this.UserID}`, payload)
+    .then(res => {
+      console.log('User updated successfully:', res.data);
+      this.successMessage = 'User successfully updated.';
+    })
+    .catch(error => {
+      console.error('User update error:', error);
+      this.successMessage = 'Error updating user.';
+    });
+},
+
     backToLoginPage() {
       window.location.href = '/';
     }

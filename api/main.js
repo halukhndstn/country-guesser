@@ -106,7 +106,7 @@ app.post('/users', async (req, res) => {
     const { username, email, password, isadmin } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
+   
     const result = await pool.query(
       'INSERT INTO public.user (username, email, password, isadmin) VALUES ($1, $2, $3, $4) RETURNING *',
       [username, email, hashedPassword, isadmin]
@@ -122,20 +122,31 @@ app.put('/users/:id', async (req, res) => {
     const { id } = req.params;
     const { username, email, password, isadmin } = req.body;
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const userResult = await pool.query('SELECT * FROM public.user WHERE id = $1', [id]);
+    const user = userResult.rows[0];
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    let hashedPassword = user.password; 
+
+    if (password && password !== user.password) {
+      hashedPassword = await bcrypt.hash(password, 10);
+    }
 
     const result = await pool.query(
       'UPDATE public.user SET username = $1, email = $2, password = $3, isadmin = $4 WHERE id = $5 RETURNING *',
       [username, email, hashedPassword, isadmin, id]
     );
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'User not found' });
-    }
+
     res.json(result.rows[0]);
   } catch (err) {
+    console.error('User update error:', err.message);
     res.status(500).json({ error: err.message });
   }
 });
+
 
 app.delete('/users/:id', async (req, res) => {
   try {
@@ -152,18 +163,16 @@ app.delete('/users/:id', async (req, res) => {
 
 app.post('/adminlogin', async (req, res) => {
   const { email, password } = req.body;
-  console.log('Gelen şifre:', password);
+
   try {
     const result = await pool.query('SELECT * FROM public.user WHERE email = $1', [email]);
     const user = result.rows[0];
-    console.log('User found:', user);
 
     if (!user) {
       console.log('Invalid email');
       return res.status(401).json({ error: 'Invalid email or password.' });
     }
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log('Password match:', isMatch);
 
     if (!isMatch) {
       return res.status(401).json({ error: 'Invalid email or password.' });
