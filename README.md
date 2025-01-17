@@ -1,6 +1,7 @@
 # Country Guesser Game with Admin Panel
 A map-based WEB game where users answer location questions (capitals or tourist destinations) by clicking on the map within a set time limit.
 
+**Video**: https://youtu.be/6JfEYxxkOog
 ## Installation
 - Clone or install this repository from GitHub:
 
