@@ -1,29 +1,60 @@
-# .
+# Country Guesser Game with Admin Panel
+A map-based WEB game where users answer location questions (capitals or tourist destinations) by clicking on the map within a set time limit.
 
-This template should help get you started developing with Vue 3 in Vite.
+## Installation
+- Clone or install this repository from GitHub:
 
-## Recommended IDE Setup
+        git clone https://github.com/GMT-458-Web-GIS/final-project-halukhndstn.git
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Perform a "Restore" operation via **pgAdmin4** using the "web-gis.sql" file in the "sql" folder. (The necessary tables in the database are created.)
+- Write information about the database you will use in the "connection.js" file in the "api" folder.
+  - **Example:**
 
-## Customize configuration
+  ![image](https://github.com/user-attachments/assets/b800c44e-c101-4029-88e4-c732be58dad9)
+- Open terminal in the repository file and, use this command:
+    - to first start:
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+          npm install && npm start
+      
+    - to start:
 
-## Project Setup
+          npm start
+      
+- Go to "http://localhost:5173/" and enjoy it!
 
-```sh
-npm install
+## Project Structure
+- **Vue.js**: A modern JavaScript framework used for user interface development.
+- **Leaflet**: A lightweight and powerful JavaScript library used for map visualization.
+- **Node.js**: A JavaScript runtime environment used as an API layer.
+- **PostgreSQL + PostGIS**: An open source relational database system that supports geographic data management and queries.
+- **Nominatim**: An API for OpenStreetMap based location searching and geocoding.
+
+## Use-Case
+![image](https://github.com/user-attachments/assets/ad4a8d50-ba7b-454b-b0f1-b74f917b3c4a)
+
+## SQL Query Functions
+**Example:**
+```javascript
+app.put('/questions/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { qtext, answer, latitude, longitude } = req.body;
+
+    const result = await pool.query(
+      'UPDATE public.question SET qtext = $1, answer = $2, latitude = $3, longitude = $4, geom = ST_SetSRID(ST_MakePoint($4, $3), 4326) WHERE id = $5 RETURNING *',
+      [qtext, answer, latitude, longitude, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Question not found' });
+    }
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 ```
+With this function, when the "latitude" and "longitude" information is changed via the admin panel, the "geom" column is automatically filled.
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+## Use of AI
+Artificial intelligence was used to help with error correction, creating question data, determining the method, and how to create the file structure.
