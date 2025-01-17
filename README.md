@@ -30,7 +30,7 @@ A map-based WEB game where users answer location questions (capitals or tourist 
 - **Nominatim**: An API for OpenStreetMap based location searching and geocoding.
 
 ## Use-Case
-![image](https://github.com/user-attachments/assets/ad4a8d50-ba7b-454b-b0f1-b74f917b3c4a)
+![image](https://github.com/user-attachments/assets/dbd43985-9510-466b-b867-d47bad0e3298)
 
 ## SQL Query Functions
 **Example:**
