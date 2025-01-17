@@ -33,6 +33,8 @@ A map-based WEB game where users answer location questions (capitals or tourist 
 ## Use-Case
 ![image](https://github.com/user-attachments/assets/dbd43985-9510-466b-b867-d47bad0e3298)
 
+**Admins** can log in to the admin panel and edit the question and user tables using all **CRUD** methods. **Users** can see the questions using the **Read** method.
+
 ## SQL Query Functions
 **Example:**
 ```javascript
