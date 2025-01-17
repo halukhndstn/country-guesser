@@ -57,4 +57,4 @@ app.put('/questions/:id', async (req, res) => {
 With this function, when the "latitude" and "longitude" information is changed via the admin panel, the "geom" column is automatically filled.
 
 ## Use of AI
-Artificial intelligence was used to help with error correction, creating question data, determining the method, and how to create the file structure.
+Helped to draw a roadmap on how to do the project. Decided on the API to determine the country of the user selected locations. Learned how to use Nominatim (OpenStreetMap Geocoding API). Learned why I needed to use OpenSteerMap's CARTO and how to use it. Helped to get a cleaner code and tested the color palettes via shortcuts. Helped to resolve bugs so that the function structure in JavaScript was understood more clearly. Helped to choose the method of hashing ("bcrypt") the passwords for security while writing the API. Helped me to create query data and write the appropriate SQL query.
