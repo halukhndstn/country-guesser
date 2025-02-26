@@ -35,3 +35,16 @@ A map-based WEB game where users answer location questions (capitals or tourist 
 ![image](https://github.com/user-attachments/assets/dbd43985-9510-466b-b867-d47bad0e3298)
 
 **Admins** can log in to the admin panel and edit the question and user tables using all **CRUD** methods. **Users** can see the questions using the **Read** method.
+
+## Screenshots
+### Login Screen
+![image](https://github.com/user-attachments/assets/09cad98f-f636-4e5f-8383-16cfddee26eb)
+### Game Screen
+![image](https://github.com/user-attachments/assets/3f5e032f-7181-41a9-bd5e-0a561b4c12dc)
+### Admin Panel
+![image](https://github.com/user-attachments/assets/a60591bb-aecf-4797-abf1-6d932de4f30d)
+
+![image](https://github.com/user-attachments/assets/febe2629-7aae-48e5-8119-a2b918db3ca7)
+
+
+
